@@ -1,6 +1,6 @@
 ﻿namespace TaskTracker.Contracts.Response;
 
-public class StudeneResponseDto
+public class StudentResponseDto
 {
     public Guid Id { get; set; }
     public String? FullName { get; set; }
