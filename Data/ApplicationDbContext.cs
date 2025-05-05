@@ -1,12 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TaskTracker.Entities;
 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 namespace TaskTracker.Data;
 
 public class ApplicationDbContext : DbContext
 
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options):base(options)
     {
         
     }
