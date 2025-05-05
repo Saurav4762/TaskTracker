@@ -1,6 +1,10 @@
 using System.Data;
 using Microsoft.EntityFrameworkCore;
 using TaskTracker.Data;
+using TaskTracker.Service;
+using TaskTracker.Service.Interface;
+using TaskTracker.Repository;
+using TaskTracker.Repository.Interface;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +15,11 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<IStudentRepository, StudentRepository>();
+builder.Services.AddScoped<IStudentService, StudentService>();
+builder.Services.AddScoped<IAssignmentservice, AssignmentService>();
+builder.Services.AddScoped<IAssignmentRepository, AssignmentRespository>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(b =>
 {
@@ -23,7 +32,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
