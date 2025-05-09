@@ -17,6 +17,10 @@ public class AssignmentService : IAssignmentservice
 
     public async Task<Assignment> AddAssignmentAsync(AssignmentRequestDto dto)
     {
+        if (string.IsNullOrWhiteSpace(dto.Title))
+        {
+            throw new Exception("Title is required");
+        }
         var assignment = new Assignment
         {
             Title = dto.Title,
@@ -32,6 +36,10 @@ public class AssignmentService : IAssignmentservice
 
     public async Task<Assignment> UpdateAssignmentAsync(Guid id, AssignmentRequestDto dto)
     {
+        if (string.IsNullOrWhiteSpace(dto.Title))
+        {
+            throw new Exception("Title is required");
+        }
         var assignment = await _db.Assignments.FindAsync (id);
         if (assignment == null)
         {

@@ -16,6 +16,10 @@ public class StudentService:IStudentService
 
     public async Task<Student> AddStudentAsync(StudentRequestDto dto)
     {
+        if (string.IsNullOrWhiteSpace(dto.FullName))
+        {
+            throw new Exception("Full name is required");
+        }
         var student = new Student
         {
             FullName = dto.FullName,
@@ -30,10 +34,14 @@ public class StudentService:IStudentService
 
     public async Task<Student> UpdateStudentAsync(Guid id, StudentRequestDto dto)
     {
-        var student = await _context.Students.FindAsync(id);
-        if (student == null)
+        if (string.IsNullOrEmpty(dto.FullName))
         {
-            throw new Exception ("Student not found");
+            throw new Exception("Full name is required");
+        }
+        var student = await _context.Students.FindAsync(id);
+        if (student == null) 
+        {
+            throw new Exception("Student not found");
         }
         student.FullName = dto.FullName;
         student.Email = dto.Email;

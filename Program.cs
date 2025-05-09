@@ -1,6 +1,7 @@
 using System.Data;
 using Hangfire;
 using Hangfire.PostgreSql;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using TaskTracker.Data;
 using TaskTracker.Service;
@@ -17,11 +18,15 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IAssignmentservice, AssignmentService>();
 builder.Services.AddScoped<IAssignmentRepository, AssignmentRespository>();
+
+builder.Services.AddIdentityApiEndpoints<IdentityUser>()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 //configiure for connection with database
 builder.Services.AddDbContext<ApplicationDbContext>(b =>
@@ -57,11 +62,12 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapStaticAssets();
+app.MapIdentityApi<IdentityUser>();
 
 app.MapControllerRoute(
         name: "default",
         pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+    .RequireAuthorization() .WithStaticAssets();
 
 app.UseHangfireDashboard(); // Enables the dashboard
 app.UseHangfireServer();    // Starts the background job server

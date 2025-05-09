@@ -29,10 +29,7 @@ public class AssignmentRespository:IAssignmentRepository
 
             }).FirstOrDefaultAsync();
 
-        if (assignment == null)
-        {
-            throw new Exception("Assignment not found");
-        }
+      
         return assignment;
     }
 

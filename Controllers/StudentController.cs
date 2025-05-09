@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TaskTracker.Entities;
 using TaskTracker.Data;
 using TaskTracker.Contracts;
@@ -12,6 +13,7 @@ using TaskTracker.Service.Interface;
 namespace TaskTracker.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+
 public class StudentController : ControllerBase
 {
     private readonly IStudentService _studentService;

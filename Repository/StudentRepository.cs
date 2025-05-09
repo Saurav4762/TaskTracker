@@ -37,10 +37,7 @@ public class StudentRepository : IStudentRepository
                Email = a.Email,
            }).FirstOrDefaultAsync();
 
-       if (student == null)
-       {
-           throw new Exception("Student not found");
-       }
+       
        return student;
            
            
