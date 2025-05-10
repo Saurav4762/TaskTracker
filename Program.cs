@@ -24,18 +24,19 @@ builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IStudentService, StudentService>();
 builder.Services.AddScoped<IAssignmentservice, AssignmentService>();
 builder.Services.AddScoped<IAssignmentRepository, AssignmentRespository>();
+builder.Services.AddScoped<IBulkJobService, BulkJobService>();
 
 builder.Services.AddIdentityApiEndpoints<IdentityUser>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
-//configiure for connection with database
+//configure for connection with database
 builder.Services.AddDbContext<ApplicationDbContext>(b =>
 {
     var connectionstring = builder.Configuration.GetConnectionString("DefaultConnection");
     b.UseNpgsql(connectionstring);
 });
 
-//configuartion for hangfire
+//configuration for hangfire
 builder.Services.AddHangfire(config => config
     .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
     .UseSimpleAssemblyNameTypeSerializer()
@@ -61,7 +62,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapStaticAssets();
 app.MapIdentityApi<IdentityUser>();
 
 app.MapControllerRoute(
