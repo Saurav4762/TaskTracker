@@ -35,5 +35,6 @@ public class BulkJobService : IBulkJobService
         {
             await _assignmentService.AddAssignmentAsync(assignment);
         }
+        scope.Complete();
     }
 }

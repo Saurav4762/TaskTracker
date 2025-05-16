@@ -20,7 +20,7 @@ public class BulkImportController: ControllerBase
     [HttpPost("import-students")]
     public async Task<IActionResult> BulkImport([FromBody] StudentRequestDto dto)
     {
-        var jobId = BackgroundJob.Enqueue<IBulkJobService>(x => x.ImportStudentsAsync(dto.Students));
+        var jobId =  BackgroundJob.Enqueue<IBulkJobService>(x => x.ImportStudentsAsync(dto.Students));
             
         return Accepted(new
         {
