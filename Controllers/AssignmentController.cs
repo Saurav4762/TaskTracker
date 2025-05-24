@@ -17,11 +17,13 @@ public class AssignmentController : ControllerBase
 {
     private readonly IAssignmentRepository _assignmentRepository;
     private readonly IAssignmentservice _assignmentService;
+    private readonly ILogger<AssignmentController> _logger;
 
-    public AssignmentController(IAssignmentRepository assignmentRepository, IStudentRepository studentRepository, IAssignmentservice assignmentService)
+    public AssignmentController(IAssignmentRepository assignmentRepository, IStudentRepository studentRepository, IAssignmentservice assignmentService, ILogger<AssignmentController> logger)
     {
         _assignmentRepository = assignmentRepository;
         _assignmentService = assignmentService;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -29,6 +31,7 @@ public class AssignmentController : ControllerBase
     {
         try
         {
+            _logger.LogInformation("Getting all assignments");
             var assignment = await _assignmentRepository.GetAllAssignmentAsync();
             return Ok(new {message = "Assignments Found successfully", Data = assignment});
 
@@ -60,7 +63,12 @@ public class AssignmentController : ControllerBase
     {
         try
         {
+            _logger.LogInformation("Adding new assignment");
+            
             var assignment = await _assignmentService.AddAssignmentAsync(dto);
+            
+            _logger.LogInformation("Assignment created successfully{assignmentId}", assignment.Id);
+            
             return Ok(new {message = "Assignment Added successfully", id = assignment.Id});
 
         }
