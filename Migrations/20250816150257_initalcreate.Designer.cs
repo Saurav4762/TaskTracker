@@ -12,8 +12,8 @@ using TaskTracker.Data;
 namespace TaskTracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250513160923_initialcreate")]
-    partial class initialcreate
+    [Migration("20250816150257_initalcreate")]
+    partial class initalcreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

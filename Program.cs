@@ -37,11 +37,15 @@ builder.Services.AddDbContext<ApplicationDbContext>(b =>
 });
 
 //configuration for hangfire
-builder.Services.AddHangfire(config => config
-    .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
-    .UseSimpleAssemblyNameTypeSerializer()
-    .UseRecommendedSerializerSettings()
-    .UsePostgreSqlStorage(builder.Configuration.GetConnectionString("DefaultConnection"))); 
+// #pragma warning disable CS0618 // Type or member is obsolete
+// builder.Services.AddHangfire(config => config
+//     .SetDataCompatibilityLevel(CompatibilityLevel.Version_180)
+//     .UseSimpleAssemblyNameTypeSerializer()
+//     .UseRecommendedSerializerSettings()
+//     .UsePostgreSqlStorage(builder.Configuration.GetConnectionString("DefaultConnection"))); 
+// #pragma warning restore CS0618 // Type or member is obsolete
+
+
 
 var app = builder.Build();
 
@@ -69,7 +73,7 @@ app.MapControllerRoute(
         pattern: "{controller=Home}/{action=Index}/{id?}")
     .RequireAuthorization() .WithStaticAssets();
 
-app.UseHangfireDashboard(); // Enables the dashboard
-app.UseHangfireServer();    // Starts the background job server
+// app.UseHangfireDashboard(); // Enables the dashboard
+// app.UseHangfireServer();    // Starts the background job server
 
 app.Run();

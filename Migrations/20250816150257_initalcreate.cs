@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TaskTracker.Migrations
 {
     /// <inheritdoc />
-    public partial class initialcreate : Migration
+    public partial class initalcreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
