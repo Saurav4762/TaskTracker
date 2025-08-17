@@ -15,7 +15,7 @@ public class BulkJobService : IBulkJobService
         _assignmentService = assignmentService;
     }
 
-    public async Task ImportStudentsAsync(List<StudentRequestDto> students)
+    public async Task ImportStudentsAsync(List<StudentRequestDto>? students)
     {
         var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 

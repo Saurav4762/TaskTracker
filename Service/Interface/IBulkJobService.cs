@@ -5,7 +5,7 @@ namespace TaskTracker.Service.Interface;
 
 public interface IBulkJobService
 {
-    public Task ImportStudentsAsync(List<StudentRequestDto> students);
+    public Task ImportStudentsAsync(List<StudentRequestDto>? students);
     
     public Task ImportAssignmentsAsync(List<AssignmentRequestDto> assignments);
 }
